@@ -73,7 +73,11 @@ int main()
 		wczytaj(n, tab);
 		odwroc(n, tab);
 		wypisz(n, tab);
+
+		free(tab);
+
 	}
+
 
 	system("PAUSE");
 	return 0;
