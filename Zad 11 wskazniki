@@ -32,7 +32,7 @@ int* alokuj(int n){
 int* wypelnij(int n, int *tab){
 
 	for (int i = 0; i < n; i++){
-		tab[i] = n - i;
+		*(tab + i) = n - i;
 	}
 	return tab;
 }
@@ -41,9 +41,9 @@ int* wypelnij(int n, int *tab){
 void wypisz(int n, int *tab){
 
 	for (int i = 0; i < n-1; i++){
-		cout << tab[i] << " ";
+		cout << *(tab+i) << " ";
 	}
-	cout << tab[n-1] << "\n";
+	cout << *(tab+n-1) << "\n";
 }
 
 int main()
