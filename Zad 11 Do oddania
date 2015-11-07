@@ -58,6 +58,8 @@ int main()
 	tab = wypelnij(n, tab);
 	wypisz(n,tab);
 
+	free(tab);
+
 	system("PAUSE");
 	return 0;
 }
