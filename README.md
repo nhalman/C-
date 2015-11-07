@@ -1,44 +1,48 @@
-/*
-Zadanie #2
-Napisz program obliczający współrzędne wektora
-AB!
-, mając dane współrzędne punktów
-A = (xA, yA)
-oraz
-B = (xB, yB)
+/*Zadanie #5
+Napisz program, który wczyta dwie duże litery z wejścia, a następnie wypisze wszystkie litery
+pomiędzy tymi dwiema.
 Wejście
-Na wejściu w jednej linii podaje się współrzędne dwóch punktów kolejno:
-xA yA xB yB
-oddzielone spacjami.
+Na wejściu w pierwszej linii podawana jest ilość testów. Następnie w t-następnych liniach podawane
+są dwie duże litery odzielone spacją.
 Wyjście
-Na wyjściu podawane są dwie cyfry będące współrzędnymi wektora
-AB
-*/
+Na wyjściu mają się pojawić dwie podane litery oraz ciąg liter pomiędzy tymi dwiema oddzielone
+spacjami .*/
 
 #include "stdafx.h"
 #include <iostream>
 #include <cstdlib>
-#include <stdio.h>
-#define _CRT_SECURE_NO_WARNINGS
+//#define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_DEPRECATE
 using namespace std;
 
 int main()
 {
-	int x1;
-	int x2;
-	int y1;
-	int y2;
-	int a;
-	int b;
+	int t; //ilość testów
+	char p; //początkowa litera
+	int pz; //zmienna do zrzucena p na inty
+	char k; //końcowa litera
+	int kz; //zmienna do zrzucena k na inty
+	int litery; //ilosc liter do wypisania
 
-	scanf_s("%d %d %d %d", &x1, &y1, &x2, &y2);
+	cin >> t;
 
-	a = x2 - x1;
-	b = y2 - y1;
+	for (int j = 0; j < t; j++){
+		cin >> p;
+		cin >> k;
 
-	printf("%d %d\n", a, b);
+		pz = (int)p; //zrzutowanie początkowej litery na inta, żeby móc skorzystać z ASCII
+		kz = (int)k; //zrzutowanie końcowej litery na inta, żeby móc skorzystać z ASCII
+		litery = kz - pz; //ilość liter do wypisania
 
+		for (int i = 0; i < litery; i++){
+			printf("%c ", pz);
+			pz++;
+		}
+
+		printf("%c\n", k);
+
+	}
+	
 	system("PAUSE");
 	return 0;
 }
-
