@@ -1,0 +1,62 @@
+/*
+Generowanie podciągu - test losowy
+*/
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+
+void test_losowy(int n,int m){
+
+	int wybierz = m;
+	int pozostalo = n;
+	float prawd;
+	float los;
+	srand(time(NULL));
+
+	for (int i = 1; i <= n; i++){
+		prawd = (double)wybierz / (double)pozostalo;
+		los = (double)rand() / ((double)RAND_MAX + 1.0);
+		
+		if (los < prawd){
+			cout << i << " ";
+			wybierz = wybierz - 1;
+		}
+
+		pozostalo = pozostalo - 1;
+	}
+
+	cout << "\n";
+
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int m;
+	int n;
+
+	cout << "Podaj n (koniec przedzialu 1,...,n): ";
+	cin >> n;
+	cout << "Podaj m < n (ilosc liczb do wygenerowania): ";
+	cin >> m;
+
+	if (m > n){
+		cout << "Nieprawidlowe dane! Podano m > n.\n";
+	}
+	else if (m == n){
+		for (int i = 1; i < n; i++){
+			cout << i << " ";
+		}
+		cout << n << "\n";
+	}
+	else if (m < n){
+		test_losowy(n, m);
+	}
+
+
+	system("PAUSE");
+	return 0;
+}
