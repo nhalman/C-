@@ -1,0 +1,72 @@
+/*
+Zadanie #14
+a) Wczytać z klawiatury zadaną tablicę zadanej liczby struktur typu student, zapisać do pliku
+studenci.dat, odczytać plik i wydrukować.
+b) Napisać funkcję wyszukującą w pliku studenci.dat studenta o zadanym nazwisku.
+*/
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <fstream> //narzedzia do pracy z plikami
+using namespace std;
+
+
+
+
+//zdefiniowanie struktury
+struct student{
+	string nazwisko;
+	string imie;
+	int wiek;
+};
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int ilosc;
+	student wykaz[100];
+
+
+	cout << "Ilu studentow chcesz wprowadzic?\n";
+	cin >> ilosc; //ilosc studentow do wprowadzenia
+
+	//utworzenie pliku
+	fstream plik("studenci.dat");
+
+	plik.open("studenci.dat", ios::out);
+	//wczytanie danych studenktow do pliku
+	for (int i = 0; i < ilosc; i++){
+		cout << "\n" << i + 1<< ". Podaj imie studenta:\n";
+		cin >> wykaz[i].imie;
+		plik << wykaz[i].imie;//imie- zapis do pliku
+		plik << " ";
+		cout << i + 1 << ". Podaj nazwisko studenta:\n";
+		cin >> wykaz[i].nazwisko;
+		plik << wykaz[i].nazwisko;//nazwisko- zapis do pliku
+		plik << " ";
+		cout << i + 1 << ". Podaj wiek studenta:\n";
+		cin >> wykaz[i].wiek;
+		plik << wykaz[i].wiek;//wiek- zapis do pliku
+		plik << "\n";
+	}
+	plik.close();
+
+
+	//otwarcie pliku
+	plik.open("studenci.dat", ios::in);
+
+	//wyswietlenie zawartosci
+	cout << "\nZawartosc pliku: \n";
+	string linia;
+	while (getline(plik, linia))    // Jeśli jeszcze nie nastąpił koniec pliku, czytamy dalej
+	{
+		cout << linia << "\n"; // Wyświetlamy odczytany tekst w konsoli
+	}
+
+	plik.close();
+
+	system("PAUSE");
+	return 0;
+}
