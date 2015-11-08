@@ -1,0 +1,98 @@
+/*
+Zadanie #14
+a) Wczytać z klawiatury zadaną tablicę zadanej liczby struktur typu student, zapisać do pliku
+studenci.dat, odczytać plik i wydrukować.
+b) Napisać funkcję wyszukującą w pliku studenci.dat studenta o zadanym nazwisku.
+*/
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <fstream> //narzedzia do pracy z plikami
+using namespace std;
+
+
+
+
+//zdefiniowanie struktury
+struct student{
+	string nazwisko;
+	string imie;
+	int wiek;
+};
+
+void wprowadzanie(){
+	int ilosc;
+	student wykaz[100];
+
+	cout << "Ilu studentow chcesz wprowadzic?\n";
+	cin >> ilosc; //ilosc studentow do wprowadzenia
+
+	//utworzenie pliku
+	ofstream plik("studenci.dat");
+	//otwarcie pliku do wczytania danych
+	plik.open("studenci.dat", ios::out);
+
+	//wczytanie danych studentow do pliku
+	for (int i = 0; i < ilosc; i++){
+		cout << "\n" << i + 1 << ". Podaj imie studenta:\n";
+		cin >> wykaz[i].imie;
+		plik << wykaz[i].imie; //imie- zapis do pliku
+		plik << " ";
+		cout << i + 1 << ". Podaj nazwisko studenta:\n";
+		cin >> wykaz[i].nazwisko;
+		plik << wykaz[i].nazwisko; //nazwisko- zapis do pliku
+		plik << " ";
+		cout << i + 1 << ". Podaj wiek studenta:\n";
+		cin >> wykaz[i].wiek;
+		plik << wykaz[i].wiek; //wiek- zapis do pliku
+		plik << "\n";
+	}
+	plik.close();
+}
+
+void wyswietl(){
+	//utworzenie pliku
+	ifstream plik("studenci.dat");
+	//otwarcie pliku do wyswietlenia zawartosci
+	plik.open("studenci.dat", ios::in);
+
+	//wyswietlenie zawartosci pliku
+	cout << "\nZawartosc pliku: \n";
+	string linia;
+	while (getline(plik, linia)) // Jeśli jeszcze nie nastąpił koniec pliku, czytamy dalej
+	{
+		cout << linia << "\n"; // Wyświetlamy odczytany wiersz w konsoli
+	}
+	//zamkniecie pliku
+	plik.close();
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int ilosc;
+	string szukaj_nazwisko;
+	int wybor;
+
+	cout << "Wybierz co chcesz zrobic. \n";
+	cout << "1- wprowadzic studenta.\n";
+	cout << "2- wyswietlic liste studentow.\n";
+	cin >> wybor;
+
+	if (wybor == 1){
+		wprowadzanie();
+	}
+	if (wybor == 2){
+		wyswietl();
+	}
+
+
+
+	cout << "\nPodaj nazwisko studenta do wyszukania:\n";
+	cin >> szukaj_nazwisko;
+
+
+	system("PAUSE");
+	return 0;
+}
