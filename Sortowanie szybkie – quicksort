@@ -13,14 +13,14 @@ using namespace std;
 
 void sort(int *T, int d, int g){
 	int s;
-	int el_gr = T[(g-d+1)/2]; //element graniczny, względem którego sortujemy tablice
-	int srodek = (g-d+1)/2;
+	int el_gr = T[(g+d)/2]; //element graniczny, względem którego sortujemy tablice
+	int srodek = (g+d)/2;
 	int temp;
 
 	if (d < g){
 		//rozdzielanie
 
-		for (int k = 0; k <= (g-d+1) / 2 - 1; k++){
+		for (int k = 0; k <= (g+d) / 2 - 1; k++){
 			if (T[k]<el_gr){
 				srodek = srodek + 1;
 				temp = T[srodek];
@@ -29,11 +29,11 @@ void sort(int *T, int d, int g){
 			}
 		}
 
-		temp = T[(g-d+1) / 2];
-		T[(g-d+1) / 2] = T[srodek];
+		temp = T[d];
+		T[d] = T[srodek];
 		T[srodek] = temp;
 
-		for (int k = (g-d+1) / 2 + 1; k <= g; k++){
+		for (int k = (g+d) / 2 + 1; k <= g; k++){
 			if (T[k]<el_gr){
 				srodek = srodek + 1;
 				temp = T[srodek];
@@ -42,8 +42,8 @@ void sort(int *T, int d, int g){
 			}
 		}
 
-		temp = T[(g-d+1) / 2];
-		T[(g-d+1) / 2] = T[srodek];
+		temp = T[d];
+		T[d] = T[srodek];
 		T[srodek] = temp;
 
 		sort(T, d, srodek - 1);
