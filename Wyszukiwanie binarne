@@ -1,0 +1,69 @@
+/*
+Wyszukiwanie binarne
+
+Wejście: posortowana, n-elementowa tablica liczbowa T oraz liczba p.
+Wyjście: liczba naturalna, określająca pozycję elementu p w tablicy T, bądź –1,
+jeżeli element w tablicy nie występuje.
+*/
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+
+
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int T[10] = {4,6,8,10,14,22,24,33,48,78}; //tablica
+	int n = 10;
+	int p; //liczba 
+	int dol = 0;
+	int gora = n - 1;
+	int srodek;
+	int pozycja;
+
+	cout << "Tablica T wyglada nastepujaco: \n";
+
+	for (int i = 0; i < n; i++){
+		cout << T[i] << " ";
+	}
+
+	cout << "\n" << "Jaka liczbe chcesz znalezc?\n";
+
+	cin >> p;
+	
+	do{
+		if (dol>gora){
+			pozycja = -1;
+			break;
+		}
+		else if (dol<=gora){
+			srodek = (gora + dol) / 2;
+			if (T[srodek] == p){
+				pozycja = srodek;
+				break;
+			}
+			else if (T[srodek] < p){
+				dol = srodek + 1;
+			}
+			else if (T[srodek] > p){
+				gora = srodek - 1;
+			}
+		}
+	} while (true);
+
+	if (pozycja == -1){
+		cout << "Liczby nie ma w tablicy.\n";
+	}
+	else{
+		cout << "Liczba jest na pozycji: " << pozycja << "\n";
+	}
+
+
+
+	system("PAUSE");
+	return 0;
+}
