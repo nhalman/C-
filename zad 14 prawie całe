@@ -1,0 +1,124 @@
+/*
+Zadanie #14
+a) Wczytać z klawiatury zadaną tablicę zadanej liczby struktur typu student, zapisać do pliku
+studenci.dat, odczytać plik i wydrukować.
+b) Napisać funkcję wyszukującą w pliku studenci.dat studenta o zadanym nazwisku.
+*/
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+#include <string>
+#include <fstream> //narzedzia do pracy z plikami
+using namespace std;
+
+
+
+
+//zdefiniowanie struktury
+struct student{
+	string nazwisko;
+	string imie;
+	int rok;
+};
+
+void wprowadzenie(fstream& plik){
+	student dodaj[1];
+
+	//utworzenie pliku
+	//fstream plik("studenci.dat");
+
+	plik.open("studenci.dat", ios::app);
+
+	cout << "Podaj imie studenta:\n";
+	cin >> dodaj[0].imie;
+	plik << dodaj[0].imie;//imie- zapis do pliku
+	plik << " ";
+	cout << "Podaj nazwisko studenta:\n";
+	cin >> dodaj[0].nazwisko;
+	plik << dodaj[0].nazwisko;//nazwisko- zapis do pliku
+	plik << " ";
+	cout << "Podaj rok studiow:\n";
+	cin >> dodaj[0].rok;
+	plik << dodaj[0].rok;//wiek- zapis do pliku
+	plik << "\n";
+
+	plik.close();
+
+}
+
+void drukuj(fstream& plik){
+	//otwarcie pliku
+	plik.open("studenci.dat", ios::in);
+
+	//wyswietlenie zawartosci
+	cout << "\nZawartosc pliku: \n";
+	string linia;
+	while (getline(plik, linia))    // Jeśli jeszcze nie nastąpił koniec pliku, czytamy dalej
+	{
+		cout << linia << "\n"; // Wyświetlamy odczytany tekst w konsoli
+	}
+
+	plik.close();
+}
+
+void szukaj(fstream& plik){
+	string nazwisko; //szukane nazwisko
+
+	cout << "Podaj nazwisko studenta, ktorego szukasz: ";
+	cin >> nazwisko;
+
+	plik.open("studenci.dat", ios::in); //otwarcie pliku
+
+	//przeszukanie zawartosci
+	string linia;
+	while (getline(plik, linia))    // Jeśli jeszcze nie nastąpił koniec pliku, czytamy dalej
+	{
+		
+		cout << linia << "\n"; // Wyświetlamy odczytany tekst w konsoli
+	}
+
+	plik.close();
+
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	int wybor;
+
+	//utworzenie pliku
+	fstream plik("studenci.dat");
+
+	do{
+		cout << "---------------------------\n";
+		cout << "Wybierz co chcesz zrobic\n";
+		cout << "1- wprowadz studenta\n";
+		cout << "2- wypisz liste studentow\n";
+		cout << "3- wyszukaj studenta o zadanym nazwisku\n";
+		cout << "4- wyjscie\n";
+		cout << "---------------------------\n";
+		cin >> wybor;
+
+		if (wybor == 1){
+			system("cls");
+			wprowadzenie(plik);
+		}
+		else if (wybor == 2){
+			system("cls");
+			drukuj(plik);
+		}
+		else if (wybor == 3){
+			system("cls");
+			szukaj(plik);
+		}
+		else if (wybor == 4){
+			break;
+		}
+	} while (true);
+
+
+
+
+	//system("PAUSE");
+	return 0;
+}
