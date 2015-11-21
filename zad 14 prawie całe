@@ -113,7 +113,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		else if (wybor == 4){
 			break;
-		}
+		} 
 	} while (true);
 
 
