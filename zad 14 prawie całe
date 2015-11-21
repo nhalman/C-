@@ -64,6 +64,7 @@ void drukuj(fstream& plik){
 
 void szukaj(fstream& plik){
 	string nazwisko; //szukane nazwisko
+	int znaleziony = 0;
 
 	cout << "Podaj nazwisko studenta, ktorego szukasz: ";
 	cin >> nazwisko;
@@ -74,8 +75,15 @@ void szukaj(fstream& plik){
 	string linia;
 	while (getline(plik, linia))    // Jeśli jeszcze nie nastąpił koniec pliku, czytamy dalej
 	{
-		
-		cout << linia << "\n"; // Wyświetlamy odczytany tekst w konsoli
+		if (linia.find(nazwisko) != string::npos)
+		{
+			cout << linia << "\n"; // Wyświetlamy odczytany tekst w konsoli
+			znaleziony = 1;
+		}
+	}
+
+	if (znaleziony == 0){
+		cout << "Nie ma studenta o szukanym nazwisku.\n";
 	}
 
 	plik.close();
@@ -113,7 +121,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 		else if (wybor == 4){
 			break;
-		} 
+		}
 	} while (true);
 
 
