@@ -1,8 +1,9 @@
 /*
-Zadanie #14
+Zadanie #14-15
 a) Wczytać z klawiatury zadaną tablicę zadanej liczby struktur typu student, zapisać do pliku
 studenci.dat, odczytać plik i wydrukować.
 b) Napisać funkcję wyszukującą w pliku studenci.dat studenta o zadanym nazwisku.
+c) Napisać funkcję sortującą plik studenci.dat alfabetycznie według pola nazwisko
 */
 
 #include "stdafx.h"
@@ -95,6 +96,13 @@ void szukaj(fstream& plik){
 
 }
 
+void sortowanie(fstream& plik){
+
+	plik.open("studenci.dat", ios::in); //otwarcie pliku
+
+	plik.close();
+}
+
 int _tmain(int argc, _TCHAR* argv[])
 {
 	int wybor;
@@ -108,7 +116,8 @@ int _tmain(int argc, _TCHAR* argv[])
 		cout << "1- wprowadz studenta\n";
 		cout << "2- wypisz liste studentow\n";
 		cout << "3- wyszukaj studenta o zadanym nazwisku\n";
-		cout << "4- wyjscie\n";
+		cout << "4- posortuj plik studenci.dat alfabetycznie według pola nazwisko";
+		cout << "5- wyjscie\n";
 		cout << "---------------------------\n";
 		cin >> wybor;
 
@@ -125,6 +134,10 @@ int _tmain(int argc, _TCHAR* argv[])
 			szukaj(plik);
 		}
 		else if (wybor == 4){
+			system("cls");
+			sortowanie(plik);
+		}
+		else if (wybor == 5){
 			break;
 		}
 		else {
