@@ -73,9 +73,14 @@ void szukaj(fstream& plik){
 
 	//przeszukanie zawartosci
 	string linia;
+	int obciecie;
+	string bez_imienia;
 	while (getline(plik, linia))    // Jeśli jeszcze nie nastąpił koniec pliku, czytamy dalej
 	{
-		if (linia.find(nazwisko) != string::npos)
+		obciecie = linia.find(" "); //znalezienie pierwszej spacji
+		bez_imienia = linia;
+		bez_imienia.erase(0, obciecie + 1); //wyciecie imienia
+		if (bez_imienia.find(nazwisko) != string::npos)
 		{
 			cout << linia << "\n"; // Wyświetlamy odczytany tekst w konsoli
 			znaleziony = 1;
@@ -120,6 +125,9 @@ int _tmain(int argc, _TCHAR* argv[])
 			szukaj(plik);
 		}
 		else if (wybor == 4){
+			break;
+		}
+		else {
 			break;
 		}
 	} while (true);
