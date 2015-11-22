@@ -1,6 +1,6 @@
 /*
 Sortowanie szybkie – quicksort
-Aby posortować tablicę, dzielimy ją na dwie części ze względu na wybrany element tablicy tak, żeby wszystkie 
+Aby posortować tablicę, dzielimy ją na dwie części ze względu na wybrany element tablicy tak, żeby wszystkie
 elementy mniejsze od tego wybranego znalazły się po lewej stronie a większe po prawej.
 Następnie sortujemy rekurencyjnie każdą z części. Rekurencja kończy się, gdy przedział ma mniej niż 2 elementy.
 */
@@ -12,29 +12,22 @@ Następnie sortujemy rekurencyjnie każdą z części. Rekurencja kończy się, 
 using namespace std;
 
 void sort(int *T, int d, int g){
-	int s;
-	int el_gr = T[(g+d)/2]; //element graniczny, względem którego sortujemy tablice
-	int srodek = (g+d)/2;
+
+	int el_gr = T[d]; //element graniczny, względem którego sortujemy tablice
+	int srodek = d;
 	int temp;
+
+
+	temp = T[d];
+	T[d] = T[(d + g) / 2];
+	T[(d + g) / 2] = temp;
 
 	if (d < g){
 		//rozdzielanie
 
-		for (int k = 0; k <= (g+d) / 2 - 1; k++){
-			if (T[k]<el_gr){
-				srodek = srodek + 1;
-				temp = T[srodek];
-				T[srodek] = T[k];
-				T[k] = temp;
-			}
-		}
 
-		temp = T[d];
-		T[d] = T[srodek];
-		T[srodek] = temp;
-
-		for (int k = (g+d) / 2 + 1; k <= g; k++){
-			if (T[k]<el_gr){
+		for (int k = srodek + 1; k <= g; k++){
+			if (T[k] < el_gr){
 				srodek = srodek + 1;
 				temp = T[srodek];
 				T[srodek] = T[k];
@@ -54,17 +47,19 @@ void sort(int *T, int d, int g){
 
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int T[100]; //tablica do posortowania
-	int g = 99;
+	int T[10000]; //tablica do posortowania
+	int n = 10000;
+	int g = n-1;
 	int d = 0;
 
-	for (int j = 0; j < 100; j++){
-		T[j] = rand() % 100;
+	for (int j = 0; j < n; j++){
+		T[j] = j;
 	}
+
 
 	sort(T, d, g);
 
-	for (int k = 0; k < 100; k++){
+	for (int k = 0; k < n; k++){
 		cout << T[k] << " ";
 	}
 	cout << "\n";
