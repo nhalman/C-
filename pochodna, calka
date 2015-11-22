@@ -1,0 +1,66 @@
+
+
+#include "stdafx.h"
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+float fun(float x){
+	return 3*x*x - 2*x;
+}
+
+float pochodna1(float x, float h){
+	float wynik1;
+
+	wynik1 = (fun(x + h) - fun(x - h)) / (2 * h);
+	return wynik1;
+}
+
+float pochodna2(float x, float h){
+	float wynik2;
+
+	wynik2 = (fun(x + h) + fun(x - h)-2*fun(x)) / (h * h);
+	return wynik2;
+}
+
+float calka(float a, float b, int n){
+	float wynik3 = 0;
+
+	for (int i = 1; i <= n; i++){
+		wynik3 = wynik3 + fun(a + (double)rand() / (((double)RAND_MAX + a)) * b);
+
+	}
+
+	wynik3 = wynik3 * (b - a) / n;
+
+	return wynik3;
+}
+
+int _tmain(int argc, _TCHAR* argv[])
+{
+	float x;
+	float h;
+	float a;
+	float b;
+	int n;
+	
+	cout << "Podaj x: ";
+	cin >> x;
+	cout << "Podaj h: ";
+	cin >> h;
+
+	cout << "\nPierwsza pochodna: " << pochodna1(x, h) << "\n";
+	cout << "\nDruga pochodna: " << pochodna2(x, h) << "\n\n";
+
+
+	cout << "\n\nPodaj a: ";
+	cin >> a;
+	cout << "Podaj b: ";
+	cin >> b;
+	cout << "Podaj n: ";
+	cin >> n;
+	cout << "\nCalka: " << calka(a, b, n) << "\n\n";
+
+	system("PAUSE");
+	return 0;
+}
