@@ -24,10 +24,10 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	for (int k = 0; k < n; k++){
 
-		if (maxhere + T[k] >= 0){
+		if (maxhere + T[k] > 0){
 			maxhere = maxhere + T[k];
 		}
-		if (maxhere + T[k] < 0){
+		else if (maxhere + T[k] < 0){
 			maxhere = 0;
 		}
 
@@ -38,7 +38,7 @@ int _tmain(int argc, _TCHAR* argv[])
 		}
 	}
 
-	a = b - s;
+	a = b - s + 1;
 
 	cout << "Maksymalna suma to: " << maxsofar << "\n";
 	cout << "a to: " << a << "\n";
